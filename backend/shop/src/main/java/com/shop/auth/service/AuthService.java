@@ -2,8 +2,12 @@ package com.shop.auth.service;
 
 import com.shop.auth.dto.JwtResponse;
 import com.shop.auth.dto.LoginRequest;
+import com.shop.auth.dto.RegisterRequest;
+import com.shop.auth.entity.Role;
+import com.shop.auth.entity.User;
 import com.shop.auth.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import com.shop.auth.repository.UserRepository;
+
 
 @Service // ← acesta lipsește sau este șters
 @RequiredArgsConstructor
@@ -20,6 +27,7 @@ public class AuthService {
     private final UserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
     public JwtResponse login(LoginRequest dto) {
         // 1. autentificare
@@ -36,4 +44,26 @@ public class AuthService {
 
         return new JwtResponse(token, role);
     }
+    public JwtResponse register(RegisterRequest request) {
+
+        if (userRepository.existsByUsername(request.username())) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Username deja existent"
+            );
+        }
+
+        User user = User.builder()
+                .username(request.username())
+                .password(passwordEncoder.encode(request.password()))
+                .role(Role.CUSTOMER)
+                .build();
+
+        userRepository.save(user);
+
+        String token = jwtUtils.generateToken(user.getUsername(), "ROLE_" + user.getRole().name());
+        return new JwtResponse(token, user.getRole().name());
+    }
+
+
 }
