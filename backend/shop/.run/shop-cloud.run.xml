@@ -1,0 +1,36 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="shop-cloud" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="env">
+        <map>
+          <entry key="DB_PASSWORD" value="npg_UmOhGXB5qQt0" />
+          <entry key="DB_URL" value="jdbc:postgresql://ep-long-tree-aghgw2v2-pooler.c-2.eu-central-1.aws.neon.tech/neondb" />
+          <entry key="DB_USERNAME" value="neondb_owner" />
+          <entry key="JWT_EXPIRATION" value="3600" />
+          <entry key="JWT_SECRET" value="superSecret256BitKeyPentruDev123456789012345678901234567890" />
+          <entry key="PORT" value="8080" />
+          <entry key="REDIS_HOST" value="complete-shiner-18187.upstash.io" />
+          <entry key="REDIS_PASSWORD" value="AUcLAAIncDIwYjlhYTYyNWI2ZjI0ZTQwYTNlNzZkZWMyZWFkYzAwYXAyMTgxODc" />
+          <entry key="REDIS_PORT" value="6379" />
+          <entry key="REDIS_SSL" value="true" />
+        </map>
+      </option>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list />
+      </option>
+      <option name="vmOptions" />
+    </ExternalSystemSettings>
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>false</RunAsTest>
+    <method v="2" />
+  </configuration>
+</component>
